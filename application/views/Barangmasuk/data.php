@@ -281,8 +281,7 @@
   </div>
 
   <!-- /.content-wrapper -->
-<script>
-
+<script> 
 // .PROSES ADD DATA 
   $(document).ready(function() {
     $("#btn-tambah-form").click(function() { // Ketika tombol Tambah Data Form di klik
