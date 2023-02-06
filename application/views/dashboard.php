@@ -11,64 +11,26 @@
     </section>    
     <section class="content">
 
+	<div class="row">
+	<?php foreach($list_data as $ld){ ?>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="info-box bg-aqua">
+			<span class="info-box-icon"><i class="fa  fa-tags"></i></span>
+
+			<div class="info-box-content">
+				<span class="info-box-text"><?= $ld->nama_bahan ?></span>
+				<span class="info-box-number"><?= $ld->jml_barang." ".$ld->satuan_kode ?></span>
+
+					<span class="progress-description">
+					<a href="<?=base_url('barangmasuk/detail_tabel/'.$ld->kode_barang)?>" style="color:white">klik untuk lebih detail <i class="fa  fa-angle-double-right"></i></a>
+					</span>
+			</div>
+			<!-- /.info-box-content -->
+			</div>
+			<!-- /.info-box -->
+		</div>
+	<?php } ?>
+	</div>
+
     </section>
 </div>
-
-<script>
-window.onload = function () {
-
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	axisY: {
-		titleFontColor: "#4F81BC",
-		lineColor: "#4F81BC",
-		labelFontColor: "#4F81BC",
-		tickColor: "#4F81BC"
-	},
-	axisY2: {
-		titleFontColor: "#C0504E",
-		lineColor: "#C0504E",
-		labelFontColor: "#C0504E",
-		tickColor: "#C0504E"
-	},	
-	toolTip: {
-		shared: true
-	},
-	legend: {
-		cursor:"pointer",
-		itemclick: toggleDataSeries
-	},
-	data: [{
-		type: "column",
-		name: "Debit",
-		legendText: "Debit",
-		showInLegend: true, 
-		dataPoints:
-        <?= json_encode($arr, JSON_NUMERIC_CHECK); ?>
-	},
-	{
-		type: "column",	
-		name: "Kredit",
-		legendText: "Kredit",
-		axisYType: "secondary",
-		showInLegend: true,
-		dataPoints:
-    <?= json_encode($arr2, JSON_NUMERIC_CHECK); ?>
-	}    
-    ]
-});
-chart.render();
-
-function toggleDataSeries(e) {
-	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	}
-	else {
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
-
-}
-</script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script> 
