@@ -157,7 +157,7 @@ class bahanbaku_model extends CI_Model
 
     $result = $query->result();
     return $result; 
-  }
+    }
 
   public function GetTanggalKeluar($bagian=0, $tgl_awal=0,$tgl_akhir=0){
     $this->db->select('*');
