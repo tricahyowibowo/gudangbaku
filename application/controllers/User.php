@@ -11,6 +11,7 @@ class User extends BaseController
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('crud_model');
+        $this->load->model('bahanbaku_model');
         $this->isLoggedIn();   
     }
     
@@ -19,8 +20,9 @@ class User extends BaseController
      */
     public function index(){
         $this->global['pageTitle'] = 'GUDKU : Dashboard';
-        
-        $this->loadViews('dashboard', $this->global, NULL);
+
+        $data['list_data'] = $this->bahanbaku_model->GetDataRelease();
+        $this->loadViews('dashboard', $this->global, $data , NULL);
     }
     
     /**
