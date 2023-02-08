@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 09 Jan 2023 pada 05.32
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 7.4.29
+-- Host: localhost:3306
+-- Waktu pembuatan: 08 Feb 2023 pada 02.25
+-- Versi server: 10.4.24-MariaDB-log
+-- Versi PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,13 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tbl_bagian`
+--
+
+CREATE TABLE `tbl_bagian` (
+  `id_bagian` int(11) NOT NULL,
+  `nama_bagian` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_bagian`
+--
+
+INSERT INTO `tbl_bagian` (`id_bagian`, `nama_bagian`) VALUES
+(1, 'produksi'),
+(2, 'packing'),
+(3, 'lain-lain');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tbl_bahan`
 --
 
 CREATE TABLE `tbl_bahan` (
   `kode_bahan` varchar(50) NOT NULL,
   `nama_bahan` varchar(255) NOT NULL,
-  `supplier_id` varchar(50) NOT NULL
+  `supplier_id` varchar(50) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -38,9 +58,10 @@ CREATE TABLE `tbl_bahan` (
 --
 
 INSERT INTO `tbl_bahan` (`kode_bahan`, `nama_bahan`, `supplier_id`) VALUES
-('GL001', 'Gula Manis', ''),
-('SS001', 'Susu Bubuk', ''),
-('F001', 'Vitamin A', '');
+('F001', 'Vitamin A', NULL),
+('GL001', 'Gula Pasir', ''),
+('SKM001', 'Susu Kental Manis', ''),
+('SS001', 'Susu Bubuk', '');
 
 -- --------------------------------------------------------
 
@@ -53,7 +74,7 @@ CREATE TABLE `tbl_barang_keluar` (
   `nota_keluar` varchar(255) NOT NULL,
   `status_barang` varchar(50) NOT NULL,
   `tgl_keluar` date NOT NULL,
-  `bagian` varchar(255) NOT NULL,
+  `bagian` int(20) NOT NULL,
   `barang_id` varchar(50) NOT NULL,
   `satuan_kode` varchar(50) NOT NULL,
   `permintaan` varchar(50) NOT NULL,
@@ -65,10 +86,13 @@ CREATE TABLE `tbl_barang_keluar` (
 --
 
 INSERT INTO `tbl_barang_keluar` (`id_barang_keluar`, `nota_keluar`, `status_barang`, `tgl_keluar`, `bagian`, `barang_id`, `satuan_kode`, `permintaan`, `pengeluaran`) VALUES
-(22, 'keluar1', '1', '2023-01-05', 'produksi', '13', 'Pcs', '12', '12'),
-(23, 'keluar1', '1', '2023-01-05', 'produksi', '11', 'Pcs', '10', '10'),
-(24, 'keluar1', '1', '2023-01-05', 'produksi', '12', 'Pcs', '10', '10'),
-(25, 'keluar12', '1', '2023-01-06', 'produksi', '11', 'Pcs', '10', '10');
+(22, 'keluar1', '1', '2023-02-05', 1, '13', 'Pcs', '12', '12'),
+(23, 'keluar2', '1', '2023-02-06', 1, '11', 'Pcs', '10', '10'),
+(24, 'keluar3', '1', '2023-02-07', 2, '12', 'Pcs', '10', '10'),
+(25, 'keluar4', '1', '2023-02-08', 2, '11', 'Pcs', '10', '10'),
+(26, 'keluar5', '1', '2023-02-09', 1, '16', 'Pcs', '80', '80'),
+(27, 'keluar6', '1', '2023-02-10', 2, '16', 'Pcs', '10', '10'),
+(28, 'keluar6', '1', '2023-02-10', 2, '11', 'Pcs', '20', '20');
 
 -- --------------------------------------------------------
 
@@ -91,6 +115,7 @@ CREATE TABLE `tbl_barang_masuk` (
   `tgl_halal` date DEFAULT NULL,
   `expired_date` date NOT NULL,
   `batch` varchar(50) NOT NULL,
+  `seri` varchar(50) NOT NULL DEFAULT '',
   `status` varchar(50) NOT NULL DEFAULT 'karantina',
   `daterelease` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -99,12 +124,13 @@ CREATE TABLE `tbl_barang_masuk` (
 -- Dumping data untuk tabel `tbl_barang_masuk`
 --
 
-INSERT INTO `tbl_barang_masuk` (`id_barang_masuk`, `no_nota`, `kode_barang`, `status_barang`, `supplier_id`, `jml_barang`, `satuan_kode`, `tgl_masuk_barang`, `coa`, `tgl_coa`, `halal`, `tgl_halal`, `expired_date`, `batch`, `status`, `daterelease`) VALUES
-(11, 'tes1', 'GL001', '1', 1, 80, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-01-31', 'gl001', 'release', '2023-01-05 15:28:48'),
-(12, 'tes2', 'SS001', '1', 1, 140, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-01-31', 'sb001', 'release', '2023-01-05 15:28:51'),
-(13, 'tes3', 'F001', '1', 1, 88, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-01-31', 'V001', 'release', '2023-01-06 10:24:56'),
-(14, 'tes12', 'GL001', '1', 1, 50, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-06', '2023-02-28', 'gl002', 'release', '2023-01-06 10:24:50'),
-(15, 'tes22', 'F001', '1', 1, 2, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-03-31', 'F002', 'release', '2023-01-06 10:24:53');
+INSERT INTO `tbl_barang_masuk` (`id_barang_masuk`, `no_nota`, `kode_barang`, `status_barang`, `supplier_id`, `jml_barang`, `satuan_kode`, `tgl_masuk_barang`, `coa`, `tgl_coa`, `halal`, `tgl_halal`, `expired_date`, `batch`, `seri`, `status`, `daterelease`) VALUES
+(11, 'tes1', 'GL001', '1', 1, 60, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-01-31', 'gl001', 'seri1', 'release', '2023-01-05 15:28:48'),
+(12, 'tes2', 'SS001', '1', 1, 140, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-01-31', 'sb001', 'seri2', 'release', '2023-01-05 15:28:51'),
+(13, 'tes3', 'F001', '1', 1, 88, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-01-31', 'V001', 'seri3', 'release', '2023-01-06 10:24:56'),
+(14, 'tes12', 'GL001', '1', 1, 50, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-06', '2023-02-28', 'gl002', 'seri4', 'release', '2023-01-06 10:24:50'),
+(15, 'tes22', 'F001', '1', 1, 2, 'Pcs', '2023-01-05', 'ya', '2023-01-05', 'ya', '2023-01-05', '2023-03-31', 'F002', 'seri5', 'release', '2023-01-06 10:24:53'),
+(16, 'nota1', 'SS001', '1', 1, 10, 'Pcs', '2023-01-09', 'ya', '2023-01-09', 'ya', '2023-01-09', '2023-01-09', 'COBA1', 'seri6', 'release', '2023-01-09 11:49:20');
 
 -- --------------------------------------------------------
 
@@ -192,7 +218,8 @@ CREATE TABLE `tbl_supplier` (
 --
 
 INSERT INTO `tbl_supplier` (`id_supplier`, `nama_supplier`, `alamat_supplier`) VALUES
-(1, 'PT. ABC', 'jalan bareng sama aku yuk');
+(1, 'PT. ABC', 'jalan bareng sama aku yuk'),
+(2, 'PT. DEF', 'jalan mulu makan kaga');
 
 -- --------------------------------------------------------
 
@@ -223,8 +250,86 @@ INSERT INTO `tbl_users` (`userId`, `username`, `password`, `name`, `roleId`, `is
 (26, 'adminkas', '$2y$10$1LEUNRABhviwwADmC02KKuga8FPs60gYWxgeLaysPWWGBz7ZvS.pi', 'Admin Kas', 3, 0, 0, 25, '2022-11-21 08:39:17', 25, '2022-11-23 02:24:10'),
 (27, 'adminbank', '$2y$10$s5gqBa.txPnTIwsb0GNA..WO.5nWFbgELXkWFQNbv54P6cFPz/eKS', 'Admin Bank', 4, 0, 0, 25, '2022-11-21 08:39:51', 25, '2022-11-23 02:24:28'),
 (28, 'kabag', '$2y$10$6nu8lVNGElzWH9w7OGpv6eLKOhLsEgHcKvGYXDTZ6EcznAtGotU7a', 'Kepala Bagian', 5, 0, 0, 25, '2022-11-23 02:14:35', NULL, NULL),
-(29, 'adminpk', '$2y$10$jLKp7VDe8ESadwalwQLS7.L//ktGvxP3LPzM9PjfjnWXalNOR8T2m', 'Admin Piutang Karyawan', 6, 0, 0, 25, '2022-11-24 09:17:06', NULL, NULL),
-(30, 'susisu', '$2y$10$rcP4rnnrEiGx./a/tZpu..jj70ZUc2R0//839ZPrqsZNYUK65TTmi', 'Tri Cahya Wibawa', 3, 0, 0, 25, '2023-01-03 08:29:44', NULL, NULL);
+(29, 'adminpk', '$2y$10$jLKp7VDe8ESadwalwQLS7.L//ktGvxP3LPzM9PjfjnWXalNOR8T2m', 'Admin Piutang Karyawan', 6, 0, 0, 25, '2022-11-24 09:17:06', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_barang_keluar`
+--
+
+CREATE TABLE `tb_barang_keluar` (
+  `id` int(10) NOT NULL,
+  `id_transaksi` varchar(50) NOT NULL,
+  `tanggal_masuk` varchar(20) NOT NULL,
+  `tanggal_keluar` varchar(20) NOT NULL,
+  `lokasi` varchar(100) NOT NULL,
+  `kode_barang` varchar(100) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `jumlah` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_barang_keluar`
+--
+
+INSERT INTO `tb_barang_keluar` (`id`, `id_transaksi`, `tanggal_masuk`, `tanggal_keluar`, `lokasi`, `kode_barang`, `nama_barang`, `satuan`, `jumlah`) VALUES
+(1, 'WG-201713067948', '8/11/2017', '11/11/2017', 'NTB', '8888166995215', 'Ciki Walens', 'Dus', '50'),
+(2, 'WG-201713067948', '8/11/2017', '11/12/2017', 'NTB', '8888166995215', 'Ciki Walens', 'Dus', '6'),
+(3, 'WG-201713549728', '4/11/2017', '11/11/2017', 'Banten', '1923081008002', 'Buku Hiragana', 'Pack', '3'),
+(4, 'WG-201774896520', '9/11/2017', '12/11/2017', 'Yogyakarta', '60201311121008264', 'Battery ZTE', 'Dus', '3'),
+(5, 'WG-201727134650', '05/12/2017', '20/12/2017', 'Jakarta', '29312390203', 'Susu', 'Dus', '17'),
+(6, 'WG-201810974628', '15/01/2018', '16/01/2018', 'Lampung', '1923081008002', 'Buku Nihongo', 'Dus', '50'),
+(7, 'WG-201781267543', '7/11/2017', '17/01/2018', 'Yogyakarta', '97897952889', 'Buku Framework Codeigniter', 'Dus', '1'),
+(8, 'WG-201832570869', '15/01/2018', '17/01/2018', 'Bali', '1923081008002', 'test', 'Dus', '10'),
+(9, 'WG-201893850472', '15/01/2018', '18/01/2018', 'Bali', '1923081008002', 'lumpur nartugo', 'Pcs', '11'),
+(10, 'WG-201781267543', '7/11/2017', '15/01/2018', 'Yogyakarta', '97897952889', 'Buku Framework Codeigniter', 'Dus', '1'),
+(11, 'WG-201727134650', '05/12/2017', '15/01/2018', 'Jakarta', '29312390203', 'Susu', 'Dus', '3'),
+(12, 'WG-201774896520', '9/11/2017', '15/01/2018', 'Yogyakarta', '60201311121008264', 'Battery ZTE', 'Dus', '3'),
+(13, 'WG-201727134650', '05/12/2017', '16/01/2018', 'Jakarta', '29312390203', 'Susu', 'Dus', '1'),
+(14, 'WG-201727134650', '05/12/2017', '17/01/2018', 'Jakarta', '29312390203', 'Susu', 'Dus', '1'),
+(15, 'WG-201885472106', '18/01/2018', '19/01/2018', 'Riau', '8996001600146', 'Teh Pucuk', 'Dus', '50'),
+(16, 'WG-201871602934', '18/01/2018', '16/03/2018', 'Papua', '312212331222', 'Kopi Hitam', 'Dus', '10'),
+(0, 'WG-201871602934', '18/01/2018', '08/12/2022', 'Papua', '312212331222', 'Kopi Hitam', 'Dus', '10'),
+(0, 'WG-201871602934', '18/01/2018', '13/12/2022', 'Papua', '312212331222', 'Kopi Hitam', 'Dus', '10'),
+(0, 'WG-201871602934', '18/01/2018', '29/12/2022', 'Papua', '312212331222', 'Kopi Hitam', 'Dus', '10');
+
+--
+-- Trigger `tb_barang_keluar`
+--
+DELIMITER $$
+CREATE TRIGGER `TG_BARANG_KELUAR` AFTER INSERT ON `tb_barang_keluar` FOR EACH ROW BEGIN
+ UPDATE tb_barang_masuk SET jumlah=jumlah-NEW.jumlah
+ WHERE kode_barang=NEW.kode_barang;
+ DELETE FROM tb_barang_masuk WHERE jumlah = 0;
+
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_barang_masuk`
+--
+
+CREATE TABLE `tb_barang_masuk` (
+  `id_transaksi` varchar(50) NOT NULL,
+  `tanggal` varchar(20) NOT NULL,
+  `lokasi` varchar(100) NOT NULL,
+  `kode_barang` varchar(100) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `jumlah` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_barang_masuk`
+--
+
+INSERT INTO `tb_barang_masuk` (`id_transaksi`, `tanggal`, `lokasi`, `kode_barang`, `nama_barang`, `satuan`, `jumlah`) VALUES
+('WG-201871602934', '18/01/2018', 'Papua', '312212331222', 'Kopi Hitam', 'Dus', '70');
 
 -- --------------------------------------------------------
 
@@ -250,6 +355,18 @@ INSERT INTO `tb_satuan` (`id_satuan`, `kode_satuan`, `nama_satuan`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `tbl_bagian`
+--
+ALTER TABLE `tbl_bagian`
+  ADD PRIMARY KEY (`id_bagian`);
+
+--
+-- Indeks untuk tabel `tbl_bahan`
+--
+ALTER TABLE `tbl_bahan`
+  ADD PRIMARY KEY (`kode_bahan`);
 
 --
 -- Indeks untuk tabel `tbl_barang_keluar`
@@ -298,16 +415,22 @@ ALTER TABLE `tbl_users`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `tbl_bagian`
+--
+ALTER TABLE `tbl_bagian`
+  MODIFY `id_bagian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT untuk tabel `tbl_barang_keluar`
 --
 ALTER TABLE `tbl_barang_keluar`
-  MODIFY `id_barang_keluar` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_barang_keluar` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_barang_masuk`
 --
 ALTER TABLE `tbl_barang_masuk`
-  MODIFY `id_barang_masuk` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_barang_masuk` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_items`
@@ -331,13 +454,13 @@ ALTER TABLE `tbl_roles`
 -- AUTO_INCREMENT untuk tabel `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
-  MODIFY `id_supplier` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_supplier` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
