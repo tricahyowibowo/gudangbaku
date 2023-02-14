@@ -183,13 +183,13 @@ class bahanbaku_model extends CI_Model
   }
 
   public function GetLaporanGudangKeluar($bagian=0, $tgl_awal=0,$tgl_akhir=0){
-  $this->db->select('a.id_barang_keluar, a.nota_keluar, a.status_barang, a.tgl_keluar, a.barang_id, a.bagian, e.nama_bagian, a.satuan_kode, a.permintaan, a.pengeluaran, d.nama_bahan, b.nama_perusahaan, c.id_barang_masuk, c.kode_barang, c.expired_date, c.seri, c.batch');
+  $this->db->select('a.id_barang_keluar, a.nota_keluar, a.status_barang, a.tgl_keluar, a.barang_id, a.bagian, e.nama_bagian, a.satuan_kode, SUM(a.permintaan) as permintaan, SUM(a.pengeluaran) as pengeluaran, d.nama_bahan, b.nama_perusahaan, c.id_barang_masuk, c.kode_barang, c.expired_date, c.seri, c.batch');
   $this->db->from('tbl_barang_keluar a');
   $this->db->join('tbl_perusahaan b','b.id_perusahaan = a.status_barang');
   $this->db->join('tbl_barang_masuk c','c.id_barang_masuk = a.barang_id');
   $this->db->join('tbl_bahan d','d.kode_bahan=c.kode_barang');
   $this->db->join('tbl_bagian e','e.id_bagian=a.bagian');
-  // $this->db->group_by('tgl_keluar');
+  $this->db->group_by('kode_barang');
   $this->db->order_by('tgl_keluar','ASC');
 
   if($bagian != 0 ){
@@ -200,14 +200,41 @@ class bahanbaku_model extends CI_Model
     $this->db->where('a.tgl_keluar >=', $tgl_awal);
     $this->db->where('a.tgl_keluar <=', $tgl_akhir);
   }else{
-      $this->db->where('MONTH(a.tgl_keluar)',date('m'));
-      $this->db->where('YEAR(a.tgl_keluar)',date('Y'));
+    $this->db->where('MONTH(a.tgl_keluar)',date('m'));
+    $this->db->where('YEAR(a.tgl_keluar)',date('Y'));
   }
     $query = $this->db->get();
     $result = $query->result();
     return $result; 
   }
+
+  public function GetLaporanKeluarByBarang($id, $bagian=0, $tgl_awal=0,$tgl_akhir=0){
+    $this->db->select('a.id_barang_keluar, a.nota_keluar, a.status_barang, a.tgl_keluar, a.barang_id, a.bagian, e.nama_bagian, a.satuan_kode, a.permintaan, a.pengeluaran, d.nama_bahan, b.nama_perusahaan, c.id_barang_masuk, c.kode_barang, c.expired_date, c.seri, c.batch');
+    $this->db->from('tbl_barang_keluar a');
+    $this->db->join('tbl_perusahaan b','b.id_perusahaan = a.status_barang');
+    $this->db->join('tbl_barang_masuk c','c.id_barang_masuk = a.barang_id');
+    $this->db->join('tbl_bahan d','d.kode_bahan=c.kode_barang');
+    $this->db->join('tbl_bagian e','e.id_bagian=a.bagian');
+    $this->db->where('kode_barang',$id);
+    $this->db->order_by('tgl_keluar','ASC');
   
+    if($bagian != 0 ){
+      $this->db->where('a.bagian', $bagian);
+    }
+  
+    if($tgl_awal != 0 && $tgl_akhir != 0 ){
+      $this->db->where('a.tgl_keluar >=', $tgl_awal);
+      $this->db->where('a.tgl_keluar <=', $tgl_akhir);
+    }else{
+      $this->db->where('MONTH(a.tgl_keluar)',date('m'));
+      $this->db->where('YEAR(a.tgl_keluar)',date('Y'));
+    }
+
+      $query = $this->db->get();
+      $result = $query->result();
+      return $result; 
+    }
+
   public function GetDataGudangKeluarById($id){
     $this->db->select('a.id_barang_keluar, a.nota_keluar, a.status_barang, a.tgl_keluar, a.barang_id, a.bagian, e.nama_bagian, a.satuan_kode, a.permintaan, a.pengeluaran, d.nama_bahan, b.nama_perusahaan, c.id_barang_masuk, c.expired_date, c.batch, c.seri');
     $this->db->from('tbl_barang_keluar a');

@@ -11,9 +11,9 @@
     </section>    
     <section class="content">
 
-	<div class="row">
+	<div class="row" style="background-color:#DFE1E3;">
 	<?php foreach($list_data as $ld){ ?>
-		<div class="col-md-3 col-sm-6 col-xs-12">
+		<div class="col-md-3 col-sm-6 col-xs-12" style="margin-top:20px;">
 			<div class="info-box bg-aqua">
 			<span class="info-box-icon"><i class="fa  fa-tags"></i></span>
 

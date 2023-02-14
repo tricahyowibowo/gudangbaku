@@ -133,6 +133,17 @@ class Barangkeluar extends BaseController
       $this->loadViews("barangkeluar/laporan", $this->global, $data , NULL);
     }
 
+    public function detail_laporan(){
+      $this->global['pageTitle'] = 'Detail Barang Masuk';
+      $id = $this->uri->segment(3);
+
+      $data = array(
+        'list_detail_keluar'  => $this->bahanbaku_model->GetLaporanKeluarByBarang($id),
+      );
+    
+      $this->loadViews("barangkeluar/laporan_detail", $this->global, $data , NULL);
+    }
+
     public function cetakbarangKeluar(){
       $id = $this->uri->segment(3);
       $tgl1 = $this->uri->segment(4);

@@ -46,7 +46,7 @@ class User extends BaseController
 
 			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
             
-            $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
+            $data['userRecords'] = $this->user_model->userListing();
             
             $this->global['pageTitle'] = 'Mirota KSM : User';
             

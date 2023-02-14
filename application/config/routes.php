@@ -51,6 +51,9 @@ $route['logout'] = 'user/logout';
 $route['userListing'] = 'user/userListing';
 $route['userListing/(:num)'] = "user/userListing/$1";
 
+$route['openlock'] = 'login/showlock';
+$route['open/(:num)'] = "login/openlock/$1";
+
 $route['addNew'] = "user/addNew";
 
 $route['addNewUser'] = "user/addNewUser";

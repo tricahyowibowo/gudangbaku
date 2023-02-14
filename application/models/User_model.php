@@ -31,20 +31,17 @@ class User_model extends CI_Model
      * @param number $segment : This is pagination limit
      * @return array $result : This is result
      */
-    function userListing($page, $segment)
+    function userListing()
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.username, BaseTbl.name, Role.role');
+        $this->db->select('BaseTbl.userId, BaseTbl.username, BaseTbl.name, Role.role, BaseTbl.isLogin');
         $this->db->from('tbl_users as BaseTbl');
         $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
-
         $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->limit($page, $segment);
         $query = $this->db->get();
         
         $result = $query->result();        
         return $result;
     }
-    
     /**
      * This function is used to get the user roles information
      * @return array $result : This is result of the query

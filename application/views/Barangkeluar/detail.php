@@ -73,12 +73,12 @@
                 <tr>
                   <th>No</th>
                   <th>Nama Barang</th>
-                  <th>Satuan</th>
                   <th>Expired Date</th>
-                  <th>Satuan</th>
-                  <th>Satuan</th>
+                  <th>Batch</th>
+                  <th>No. Seri</th>
                   <th>Permintaan</th>
                   <th>Pengeluaran</th>
+                  <th>Satuan</th>
                 </tr>
                 </thead>
                 <?php if(is_array($list_detail_keluar)){ ?>
@@ -88,12 +88,12 @@
                 <tr>
                   <td><?=$no?></td>
                   <td><?=$dd->nama_bahan?></td>
-                  <td><?=$dd->satuan_kode?></td>
                   <td><?=$dd->expired_date?></td>
                   <td><?=$dd->batch?></td>
                   <td><?=$dd->seri?></td>
                   <td><?=$dd->permintaan?></td>
                   <td><?=$dd->pengeluaran?></td>
+                  <td><?=$dd->satuan_kode?></td>
                 </tr>
                 <?php $no++; ?>
                 <?php endforeach;?>

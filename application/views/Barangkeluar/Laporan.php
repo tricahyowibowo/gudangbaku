@@ -88,43 +88,24 @@
               <thead>
               <tr>
               <th>No</th>
-              <th>Kode Produk</th>
-              <th>Nama Produk</th>
-              <?php if(is_array($tanggal)){ ?>
-                <?php $no = 1;?>
-                <?php foreach($tanggal as $dd): ?>
-                <th><?=strftime('%d %b %Y', strtotime($dd->tgl_keluar))?></th>
-              <?php endforeach;?>
-              <?php }?>
-              </tr>
-              <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <?php if(is_array($tanggal)){ ?>
-                <?php $no = 1;?>
-                <?php foreach($tanggal as $dd): ?>
-                <th><?=$dd->nota_keluar?></th>
-                <!-- <th></th> -->
-              <?php endforeach;?>
-              <?php }?>
+              <th>Kode Bahan</th>
+              <th>Nama Bahan</th>
+              <th>Total Keluar</th>
+              <th>Satuan</th>
+              <th>Detail</th>
               </tr>
               </thead>
               <tbody>
               <tr>
                 <?php if(is_array($list_data)){ ?>
                 <?php $no = 1;?>
-                <?php foreach($list_bahan as $dd): ?>
+                <?php foreach($list_data as $dd): ?>
                   <td><?=$no?></td>
-                  <td><?=$dd->kode_bahan?></td>
+                  <td><?=$dd->kode_barang?></td>
                   <td><?=$dd->nama_bahan?></td>
-                  <?php foreach($list_data as $p): ?>
-                  <?php if($dd->kode_bahan === $p->kode_barang){ ?>
-                  <td><?=$p->pengeluaran?></td>
-                  <?php }else{ ?>
-                  <td><?php echo "-"?></td>
-                  <?php } ?>
-                  <?php endforeach;?>
+                  <td><?=$dd->pengeluaran?></td> 
+                  <td><?=$dd->satuan_kode?></td> 
+                  <td><a href="<?=base_url('barangkeluar/detail_laporan/'.$dd->kode_barang)?>" type="button" class="btn btn-primary btn-sm btn-detail">detail</a></td> 
               </tr>
             <?php $no++; ?>
             <?php endforeach;?>

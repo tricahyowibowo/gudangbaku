@@ -148,6 +148,19 @@ class Barangmasuk extends BaseController
     $this->session->set_flashdata('msg_berhasil','Data Barang Berhasil Direlease');
     redirect(base_url('barangmasuk'));
   }
+
+  public function batalrelease($id){
+    $id = $this->uri->segment(3);
+
+    $where['no_nota'] = $id;
+
+    $data['status'] = "kembali";
+    $data['daterelease'] = date('Y-m-d H:i:s');
+
+    $this->crud_model->update($where, $data, 'tbl_barang_masuk');
+    $this->session->set_flashdata('msg_berhasil','Data Barang Berhasil Direlease');
+    redirect(base_url('barangmasuk'));
+  }
   
   public function update_data(){
     $this->form_validation->set_rules('lokasi','Lokasi','required');

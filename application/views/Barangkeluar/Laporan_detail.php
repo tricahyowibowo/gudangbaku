@@ -2,11 +2,12 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <a type="button" class="btn btn-default"  href="<?=base_url('barangmasuk')?>" style="margin:auto;"><i class="fa fa-arrow-left"></i> Kembali</a>
+      <a type="button" class="btn btn-default"  href="<?=base_url('Laporankeluar')?>" style="margin:auto;"><i class="fa fa-arrow-left"></i> Kembali</a>
       <ol class="breadcrumb">
         <li><a href="<?=base_url('dashboard')?>"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Tables</li>
-        <li class="active"><a href="<?=base_url('admin/tabel_barangmasuk')?>"></a>Tabel Barang Masuk</li>
+        <li><a href="<?=base_url('barangkeluar')?>"></a>Tabel Barang Keluar</li>
+        <li class="active"><a href="<?=base_url('barangkeluar/detail_tabel')?>"></a>Detail Barang Keluar</li>
       </ol>
       <?php if($this->session->flashdata('msg_berhasil')){ ?>
         <div class="alert alert-success alert-dismissible" style="width:100%">
@@ -29,9 +30,9 @@
         <div class="col-xs-12">
 
           <!-- .VIEW TABEL DATA ---->
-          <div class="box box-<?php echo $colorbox?> box-solid">
+          <div class="box box-primary box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Stok <?php echo $text ?> <?php echo $status ?></h3>
+              <h3 class="box-title">Detail Data Keluar</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -41,78 +42,41 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <?php if($status === "karantina"){ ?>
               <!-- .tabel karantina --> 
-              <div class="row">
-                <div class="col-sm-6">
-                  <?php $no = 1;?>
-                  <?php foreach($list_detail_gudang as $dd): ?>
-                    <table class="table w-100">
-                        <tr>
-                            <th>No. Nota</th>
-                            <td><?php echo $dd->no_nota ?></td>
-                        </tr>
-                        <tr>
-                            <th>Pemilik</th>
-                            <td><?php echo $dd->nama_perusahaan ?></td>
-                        </tr>
-                        <tr>
-                            <th>Tanggal Datang</th>
-                            <td><?php echo $dd->tgl_masuk_barang ?></td>
-                        </tr>
-                        <tr>
-                            <th>Supplier</th>
-                            <td><?php echo $dd->nama_supplier ?></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-sm-6">
-                  <a href="<?=base_url('barangmasuk/release/'.$dd->no_nota);?>" class="btn btn-release btn-md btn-success pull-right">Release</a>
-                </div>
-                <div class="col-sm-6" style="margin-top:10px;">
-                  <a href="<?=base_url('barangmasuk/batalrelease/'.$dd->no_nota);?>" class="btn btn-btlrelease btn-md btn-danger pull-right">Batal Release</a>
-                </div>
-                <?php endforeach;?>
-              </div>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Nama barang</th>
-                  <th>Jumlah</th>
-                  <th>Satuan</th>
-                  <th>COA</th>
-                  <th>Halal</th>
+                  <th>No</th>
+                  <th>Nama Barang</th>
+                  <th>Nota Keluar</th>
+                  <th>Bagian</th>
+                  <th>Pemilik</th>
+                  <th>Tanggal Keluar</th>
                   <th>Expired Date</th>
-                  <th>No. Batch</th>
+                  <th>Batch</th>
                   <th>No. Seri</th>
-                  <th>Status</th>
+                  <th>Pengeluaran</th>
+                  <th>Satuan</th>
                 </tr>
                 </thead>
-                <?php if(is_array($list_gudang)){ ?>
+                <?php if(is_array($list_detail_keluar)){ ?>
                 <?php $no = 1;?>
-                <?php foreach($list_gudang as $dd): ?>
+                <?php foreach($list_detail_keluar as $dd): ?>
                 <tbody>
                 <tr>
-                    <td>(<?=$dd->kode_barang?>) <?=$dd->nama_bahan?></td>
-                    <td><?=$dd->jml_barang?></td>
-                    <td><?=$dd->satuan_kode?></td>
-                    <td><?=$dd->coa?> - <?=$dd->tgl_coa?></td>
-                    <td><?=$dd->halal?> - <?=$dd->tgl_halal?></td>
-                    <td><?=$dd->expired_date?></td>
-                    <td><?=$dd->batch?></td>
-                    <td><?=$dd->seri?></td>
-                    <td>
-                    <?php 
-                    $cek = $dd->status;
-                    switch ($cek) {
-                      case "karantina":?>
-                        <span class="label label-warning">Karantina</span>
-                      <?php break;
-                      default:?>
-                        <span class="label label-success">Realease</span>
-                    <?php } ?>
-                    </td>
-                  </tr>
+                  <td><?=$no?></td>
+                  <td><?=$dd->nama_bahan?></td>
+                  <td><?=$dd->nota_keluar?></td>
+                  <td><?=$dd->nama_bagian?></td>
+                  <td><?=$dd->nama_perusahaan?></td>
+                  <td><?=strftime('%d %b %Y', strtotime($dd->tgl_keluar))?></td>
+                  <td><?=strftime('%d %b %Y', strtotime($dd->expired_date))?></td>
+                  <td><?=$dd->batch?></td>
+                  <td><?=$dd->seri?></td>
+                  <td><?=$dd->pengeluaran?></td>
+                  <td><?=$dd->satuan_kode?></td>
+
+                </tr>
                 <?php $no++; ?>
                 <?php endforeach;?>
                 <?php }else { ?>
@@ -121,54 +85,6 @@
                 </tbody>
               </table>
               <!-- /.tabel karantina -->
-              <?php }else{ ?>
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Nama barang</th>
-                  <th>Jumlah</th>
-                  <th>Satuan</th>
-                  <th>COA</th>
-                  <th>Halal</th>
-                  <th>Expired Date</th>
-                  <th>No. Batch</th>
-                  <th>No. Seri</th>
-                  <th>Status</th>
-                </tr>
-                </thead>
-                <?php if(is_array($list_gudang)){ ?>
-                <?php $no = 1;?>
-                <?php foreach($list_gudang as $dd): ?>
-                <tbody>
-                <tr>
-                  <td>(<?=$dd->kode_barang?>) <?=$dd->nama_bahan?></td>
-                  <td><?=$dd->jml_barang?></td>
-                  <td><?=$dd->satuan_kode?></td>
-                  <td><?=$dd->coa?> - <?=strftime('%d %b %Y', strtotime($dd->tgl_coa))?></td>
-                  <td><?=$dd->halal?> - <?=strftime('%d %b %Y', strtotime($dd->tgl_halal))?></td>
-                  <td><?=strftime('%d %b %Y', strtotime($dd->expired_date))?></td>
-                  <td><?=$dd->batch?></td>
-                  <td><?=$dd->seri?></td>
-                  <td>
-                  <?php 
-                  $cek = $dd->status;
-                  switch ($cek) {
-                    case "karantina":?>
-                      <span class="label label-warning">Karantina</span>
-                    <?php break;
-                    default:?>
-                      <span class="label label-success">Realease</span>
-                  <?php } ?>
-                  </td>
-                </tr>
-                <?php $no++; ?>
-                <?php endforeach;?>
-                <?php }else { ?>
-                      <td colspan="7" align="center"><strong>Data Kosong</strong></td>
-                <?php } ?>
-                </tbody>
-              </table>
-              <?php } ?>
             </div>
             <!-- /.box-body -->
           </div>
