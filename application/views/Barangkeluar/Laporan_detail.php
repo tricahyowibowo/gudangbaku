@@ -75,7 +75,6 @@
                   <td><?=$dd->seri?></td>
                   <td><?=$dd->pengeluaran?></td>
                   <td><?=$dd->satuan_kode?></td>
-
                 </tr>
                 <?php $no++; ?>
                 <?php endforeach;?>

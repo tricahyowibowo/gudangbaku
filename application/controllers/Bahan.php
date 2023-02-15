@@ -19,6 +19,7 @@ class Bahan extends BaseController
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('crud_model');
+        $this->load->model('bahanbaku_model');
         // $this->load->model('transaksi_model');
         $this->isLoggedIn();   
     }
@@ -29,31 +30,41 @@ class Bahan extends BaseController
 
     public function databahan(){
         $this->global['pageTitle'] = 'Data bahan';
-        $data['list_data'] = $this->crud_model->tampil_data('tbl_bahan');
+        $data['list_data'] = $this->bahanbaku_model->GetBarang();
         $this->loadViews("bahan/data", $this->global, $data , NULL);
     }
 
     public function tambahdata(){
         $this->global['pageTitle'] = 'Tambah bahan';
 
-        $this->loadViews("bahan/tambah_bahan", $this->global , NULL);
+        $data['list_supplier'] = $this->crud_model->tampil_data('tbl_supplier');
+
+        $this->loadViews("bahan/tambah_bahan", $this->global, $data , NULL);
     }
 
     public function simpan(){
         $this->form_validation->set_rules('kode_bahan','kode bahan','required');
         $this->form_validation->set_rules('nama_bahan','nama bahan','required');
+        $this->form_validation->set_rules('supplier_id','supplier_id','required');
+        $this->form_validation->set_rules('harga_bahan','Harga','required');
 
     
         if($this->form_validation->run() == TRUE)
         {
           $kode_bahan      = $this->input->post('kode_bahan',TRUE);
           $nama_bahan      = $this->input->post('nama_bahan',TRUE);
+          $supplier_id      = $this->input->post('supplier_id',TRUE);
+          $harga_bahan      = $this->input->post('harga_bahan',TRUE);
+
 
     
           $data = array(
                 'kode_bahan'      => $kode_bahan,
                 'nama_bahan'      => $nama_bahan,
+                'supplier_id'      => $supplier_id,
+                'harga'      => $harga_bahan,
           );
+
           $this->crud_model->input($data,'tbl_bahan');
     
           $this->session->set_flashdata('msg_berhasil','Data Barang Berhasil Ditambahkan');
@@ -73,6 +84,8 @@ class Bahan extends BaseController
         $data['kode_bahan'] = $this->uri->segment(3);
 
         $data['list_data'] = $this->crud_model->Getdata($where,'tbl_bahan');
+        $data['list_supplier'] = $this->crud_model->tampil_data('tbl_supplier');
+
         $this->loadViews("bahan/detail", $this->global, $data , NULL);        
     }
 
@@ -80,12 +93,14 @@ class Bahan extends BaseController
         $kode_bahan      = $this->input->post('kode_bahan',TRUE);
         $nama_bahan      = $this->input->post('nama_bahan',TRUE);
         $supplier_id      = $this->input->post('supplier_id',TRUE);
+        $harga_bahan      = $this->input->post('harga_bahan',TRUE);
 
   
         $data = array(
               'kode_bahan'      => $kode_bahan,
               'nama_bahan'      => $nama_bahan,
-              'supplier_id'      => $supplier_id,
+              'supplier_id'     => $supplier_id,
+              'harga'           => $harga_bahan,
         );
 
         $where = array('kode_bahan' => $kode_bahan);

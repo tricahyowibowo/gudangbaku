@@ -2,7 +2,16 @@
 
 class bahanbaku_model extends CI_Model
 {
+  public function GetBarang(){
+    $this->db->select('*');
+    $this->db->from('tbl_bahan a');
+    $this->db->join('tbl_supplier b','b.id_supplier = a.supplier_id');
 
+    $query = $this->db->get();
+
+    $result = $query->result();
+    return $result;
+  }
 // .DATABASE DATA MASUK
   public function GetDataGudang(){
     $this->db->select('a.id_barang_masuk, a.no_nota, a.kode_barang, d.nama_bahan, a.seri, b.nama_perusahaan, c.nama_supplier, SUM(a.jml_barang) as jml_barang, a.satuan_kode, a.tgl_masuk_barang, a.coa, a.tgl_coa, a.halal, a.tgl_halal, a.expired_date, a.batch, a.status');
@@ -199,16 +208,37 @@ class bahanbaku_model extends CI_Model
   if($tgl_awal != 0 && $tgl_akhir != 0 ){
     $this->db->where('a.tgl_keluar >=', $tgl_awal);
     $this->db->where('a.tgl_keluar <=', $tgl_akhir);
-  }else{
-    $this->db->where('MONTH(a.tgl_keluar)',date('m'));
-    $this->db->where('YEAR(a.tgl_keluar)',date('Y'));
   }
+
     $query = $this->db->get();
     $result = $query->result();
     return $result; 
   }
 
-  public function GetLaporanKeluarByBarang($id, $bagian=0, $tgl_awal=0,$tgl_akhir=0){
+  public function GetLaporanBarangKeluar($bagian=0, $tgl_awal=0,$tgl_akhir=0){
+    $this->db->select('a.id_barang_keluar, a.nota_keluar, a.status_barang, a.tgl_keluar, a.barang_id, a.bagian, e.nama_bagian, a.satuan_kode, a.permintaan as permintaan, a.pengeluaran as pengeluaran, d.nama_bahan, b.nama_perusahaan, c.id_barang_masuk, c.kode_barang, c.expired_date, c.seri, c.batch');
+    $this->db->from('tbl_barang_keluar a');
+    $this->db->join('tbl_perusahaan b','b.id_perusahaan = a.status_barang');
+    $this->db->join('tbl_barang_masuk c','c.id_barang_masuk = a.barang_id');
+    $this->db->join('tbl_bahan d','d.kode_bahan=c.kode_barang');
+    $this->db->join('tbl_bagian e','e.id_bagian=a.bagian');
+    $this->db->order_by('tgl_keluar','ASC');
+  
+    if($bagian != 0 ){
+      $this->db->where('a.bagian', $bagian);
+    }
+  
+    if($tgl_awal != 0 && $tgl_akhir != 0 ){
+      $this->db->where('a.tgl_keluar >=', $tgl_awal);
+      $this->db->where('a.tgl_keluar <=', $tgl_akhir);
+    }
+  
+      $query = $this->db->get();
+      $result = $query->result();
+      return $result; 
+    }
+
+  public function GetLaporanKeluarByBarang($id, $tgl_awal=0,$tgl_akhir=0, $bagian=0){
     $this->db->select('a.id_barang_keluar, a.nota_keluar, a.status_barang, a.tgl_keluar, a.barang_id, a.bagian, e.nama_bagian, a.satuan_kode, a.permintaan, a.pengeluaran, d.nama_bahan, b.nama_perusahaan, c.id_barang_masuk, c.kode_barang, c.expired_date, c.seri, c.batch');
     $this->db->from('tbl_barang_keluar a');
     $this->db->join('tbl_perusahaan b','b.id_perusahaan = a.status_barang');
@@ -225,9 +255,6 @@ class bahanbaku_model extends CI_Model
     if($tgl_awal != 0 && $tgl_akhir != 0 ){
       $this->db->where('a.tgl_keluar >=', $tgl_awal);
       $this->db->where('a.tgl_keluar <=', $tgl_akhir);
-    }else{
-      $this->db->where('MONTH(a.tgl_keluar)',date('m'));
-      $this->db->where('YEAR(a.tgl_keluar)',date('Y'));
     }
 
       $query = $this->db->get();

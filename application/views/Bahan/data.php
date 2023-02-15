@@ -50,6 +50,7 @@
                     <th>No</th>
                     <th>Kode Bahan</th>
                     <th>Nama bahan</th>
+                    <th>Harga</th>
                     <th>Supplier</th>
                     <th>Edit</th>
                     <th>Delet</th>
@@ -64,7 +65,8 @@
                       <td><?=$no++?></td>
                       <td><?=$dd->kode_bahan?></td>
                       <td><?=$dd->nama_bahan?></td>
-                      <td><?=$dd->nama_bahan?></td>
+                      <td><?=$dd->harga?></td>
+                      <td><?=$dd->nama_supplier?></td>
                       <td><a type="button" class="btn btn-info"  href="<?=base_url('bahan/detail/'.$dd->kode_bahan)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                       <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('bahan/delete/'.$dd->kode_bahan)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                   </tr>

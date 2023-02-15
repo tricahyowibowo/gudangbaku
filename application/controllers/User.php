@@ -19,7 +19,7 @@ class User extends BaseController
      * This function used to load the first screen of the user
      */
     public function index(){
-        $this->global['pageTitle'] = 'GUDKU : Dashboard';
+        $this->global['pageTitle'] = 'WASIM : Dashboard';
 
         $data['list_data'] = $this->bahanbaku_model->GetDataRelease();
         $this->loadViews('dashboard', $this->global, $data , NULL);
