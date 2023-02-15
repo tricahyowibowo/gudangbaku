@@ -70,7 +70,7 @@
                   <a href="<?=base_url('barangmasuk/release/'.$dd->no_nota);?>" class="btn btn-release btn-md btn-success pull-right">Release</a>
                 </div>
                 <div class="col-sm-6" style="margin-top:10px;">
-                  <a href="<?=base_url('barangmasuk/batalrelease/'.$dd->no_nota);?>" class="btn btn-btlrelease btn-md btn-danger pull-right">Batal Release</a>
+                  <a href="<?=base_url('barangmasuk/formbatalrelease/'.$dd->no_nota);?>" class="btn btn-btlrelease btn-md btn-danger pull-right">Batal Release</a>
                 </div>
                 <?php endforeach;?>
               </div>

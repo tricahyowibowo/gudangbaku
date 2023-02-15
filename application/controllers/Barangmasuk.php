@@ -149,13 +149,22 @@ class Barangmasuk extends BaseController
     redirect(base_url('barangmasuk'));
   }
 
-  public function batalrelease($id){
-    $id = $this->uri->segment(3);
+  public function formbatalrelease(){
+    $this->global['pageTitle'] = 'Form Batal Release';
+    $this->loadViews("barangmasuk/form_batal", $this->global, NULL);
+  }
+
+  public function batalrelease(){
+    $keterangan = $this->input->post('keterangan');
+    $id = $this->input->post('id');
 
     $where['no_nota'] = $id;
 
-    $data['status'] = "kembali";
-    $data['daterelease'] = date('Y-m-d H:i:s');
+    $data = array(
+      'status' => "kembali",
+      'keterangan'      => $keterangan,
+      'daterelease'      => date('Y-m-d H:i:s'),
+    );
 
     $this->crud_model->update($where, $data, 'tbl_barang_masuk');
     $this->session->set_flashdata('msg_berhasil','Data Barang Berhasil Direlease');
