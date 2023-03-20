@@ -67,7 +67,7 @@
 <body>
   <div class="login-box">
   <div class="login-logo">
-        <a href="#"><b><small>Sistem Gudang Baku Mirota KSM</small></b></a>
+        <a href="#"><b><small>WASIM | Warehouse Sistem Mirota</small></b></a>
       </div><!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Sign In</p>
@@ -93,6 +93,14 @@
         <div class="alert alert-success alert-dismissable">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <?php echo $success; ?>
+        </div>
+      <?php }
+      $warning = $this->session->flashdata('warning');
+      if ($warning) {
+      ?>
+        <div class="alert alert-warning alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <?php echo $warning; ?>
         </div>
       <?php } ?>
 

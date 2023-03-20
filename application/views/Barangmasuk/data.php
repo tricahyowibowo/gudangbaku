@@ -30,7 +30,7 @@
           <!-- .BOX KARANTINA ---->
           <div class="box box-warning box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Stok Karantina</h3>
+              <h3 class="box-title">Bahan Karantina</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -117,7 +117,7 @@
           <!-- .BOX RELEASE ---->
           <div class="box box-success box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title"><strong>Stok Release</strong></h3>
+              <h3 class="box-title"><strong>Bahan Available</strong></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">  
@@ -163,10 +163,10 @@
                         <span class="label label-warning">Karantina</span>
                       <?php break;
                       default:?>
-                        <span class="label label-success">Realease</span>
+                        <span class="label label-success">Available</span>
                     <?php } ?>
                     </td>
-                    <td><a href="<?=base_url('barangmasuk/detail_tabel/'.$dd->kode_barang)?>" type="button" class="btn btn-primary btn-sm btn-detail">detail</a></td>
+                    <td><a href="<?=base_url('barangmasuk/detail_tabel/'.$dd->kode_barang)?>" type="button" class="btn btn-primary btn-sm btn-detail"><i class="fa fa-eye"></i></a></td>
                     <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('barangmasuk/delete_barang/'.$dd->id_barang_masuk)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                 </tr>
                 <?php $no++; ?>

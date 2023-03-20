@@ -81,6 +81,9 @@ $route['createPasswordUser'] = "login/createPasswordUser";
 $route['Databarangmasuk'] = 'barangmasuk/tabel_barangmasuk';
 $route['Formbarangmasuk'] = 'barangmasuk/form_barangmasuk';
 
+$route['Uploadstok'] = 'barangmasuk/form_uploadstok';
+
+
 $route['Databarangkeluar'] = 'barangkeluar/tabel_barangkeluar';
 
 $route['Datakategori'] = 'kategori/datakategori';
@@ -96,5 +99,6 @@ $route['Laporankeluar'] = 'barangkeluar/laporankeluar';
 
 $route['Dataakun'] = 'akun/dataakun';
 $route['data/(:any)'] = 'transaksi/laporantransaksi';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

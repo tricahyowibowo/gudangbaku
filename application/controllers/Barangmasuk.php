@@ -28,10 +28,10 @@ class Barangmasuk extends BaseController
   }
 
   public function tabel_barangmasuk(){
-    $this->global['pageTitle'] = 'Data Barang Masuk';
+    $this->global['pageTitle'] = 'Wasim | Data Barang Masuk';
 
     $data = array(
-      'list_data'       => $this->crud_model->tampil_data('tb_barang_masuk'),
+      'list_data'       => $this->crud_model->tampil_data('tbl_barang_masuk'),
       'list_bahan'     => $this->crud_model->tampil_data('tbl_bahan'),
       'list_supplier'     => $this->crud_model->tampil_data('tbl_supplier'),
       'list_karantina'     => $this->bahanbaku_model->Getdatakarantinagudang(),
@@ -44,9 +44,14 @@ class Barangmasuk extends BaseController
     $this->loadViews("barangmasuk/data", $this->global, $data , NULL);
   }
 
+  public function form_uploadstok(){
+    $this->global['pageTitle'] = 'Wasim | Tambah Barang Masuk';
 
+    $this->loadViews("barangmasuk/form_input_excel", $this->global, NULL);
+  }
+  
   public function detail_tabel(){
-    $this->global['pageTitle'] = 'Detail Barang Masuk';
+    $this->global['pageTitle'] = 'Wasim | Detail Barang Masuk';
     $id = $this->uri->segment(3);
     $ceknota = COUNT($this->bahanbaku_model->GetdatagudangByNota($id));
 
@@ -72,7 +77,6 @@ class Barangmasuk extends BaseController
       'status'              => $status,
       'list_gudang'         => $datagudang,
       'list_detail_gudang'  => $this->bahanbaku_model->GetDataKarantinaById($id),
-      'list_data'           => $this->crud_model->tampil_data('tb_barang_masuk'),
       'list_bahan'          => $this->crud_model->tampil_data('tbl_bahan'),
       'list_supplier'       => $this->crud_model->tampil_data('tbl_supplier'),
       'list_karantina'      => $this->bahanbaku_model->Getdatakarantinagudang(),
@@ -84,7 +88,7 @@ class Barangmasuk extends BaseController
   }
 
   public function form_barangmasuk(){
-    $this->global['pageTitle'] = 'Tambah Barang Masuk';
+    $this->global['pageTitle'] = 'Wasim | Tambah Barang Masuk';
 
     $data['list_satuan'] = $this->crud_model->tampil_data('tb_satuan');
     $this->loadViews("barangmasuk/form_insert", $this->global, $data , NULL);
@@ -150,7 +154,7 @@ class Barangmasuk extends BaseController
   }
 
   public function formbatalrelease(){
-    $this->global['pageTitle'] = 'Form Batal Release';
+    $this->global['pageTitle'] = 'Wasim | Form Batal Release';
     $this->loadViews("barangmasuk/form_batal", $this->global, NULL);
   }
 
@@ -197,7 +201,7 @@ class Barangmasuk extends BaseController
             'satuan'       => $satuan,
             'jumlah'       => $jumlah
       );
-      $this->crud_model->update($where,$data,'tb_barang_masuk');
+      $this->crud_model->update($where,$data,'tbl_barang_masuk');
       $this->session->set_flashdata('msg_berhasil','Data Barang Berhasil Diupdate');
       redirect('barangmasuk');
     }else{
@@ -208,7 +212,7 @@ class Barangmasuk extends BaseController
   public function detail_barang($id_transaksi){
     $where = array('id_transaksi' => $id_transaksi);
     
-    $data['data_barang_update'] = $this->crud_model->Getdata($where,'tb_barang_masuk');
+    $data['data_barang_update'] = $this->crud_model->Getdata($where,'tbl_barang_masuk');
     $data['list_satuan'] = $this->crud_model->tampil_data('tb_satuan');
     
     
@@ -217,7 +221,7 @@ class Barangmasuk extends BaseController
 
   public function delete_barang($id_transaksi){
     $where = array('id_transaksi' => $id_transaksi);
-    $this->crud_model->delete($where , 'tb_barang_masuk');
+    $this->crud_model->delete($where , 'tbl_barang_masuk');
     redirect(base_url('barangmasuk'));
   }
 }

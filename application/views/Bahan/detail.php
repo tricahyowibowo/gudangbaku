@@ -62,6 +62,24 @@
                         </div>
                       </div>
 
+                      <div class="form-group">
+                        <label for="tgl_transaksi" class="col-sm-4 control-label" >Nama bahan :</label>
+                        <div class="col-sm-6">
+                        <select class="form-control" name="supplier_id">
+                          <option value="">- Pilih Supplier -</option>
+                          <?php foreach($list_supplier as $lb){ ?>
+                            <option <?= $l->supplier_id === $lb->id_supplier ? "selected": ""?> value="<?=$lb->id_supplier?>"><?=$lb->nama_supplier?></option>
+                          <?php } ?>
+                        </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="tgl_transaksi" class="col-sm-4 control-label" >Harga bahan :</label>
+                        <div class="col-sm-6">
+                          <input type="text" name="harga_bahan" id="harga_bahan" class="form-control" value="<?=$l->harga?>">
+                        </div>
+                      </div>
                     <?php } ?>
 
                 

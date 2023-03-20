@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Batal Release
+        Input Excel
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -44,8 +44,9 @@
 
               <div class="box-body">
                 <div class="form-group">
-                  <label for="keterangan" style="margin-left:220px;display:inline;">Dokumen</label>
+                  <label for="keterangan" style="margin-left:220px;display:inline;">Alasan</label>
                   <input type="text" name="keterangan" style="margin-left:37px;width:20%;display:inline;" class="form-control">
+                  <input type="hidden" name="id" style="margin-left:37px;width:20%;display:inline;" class="form-control" value="<?php echo $this->uri->segment(3) ?>">
                 </div>
               <!-- /.box-body -->
               <div class="box-footer" style="width:93%;">

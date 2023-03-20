@@ -77,7 +77,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>KSM</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Si Amir | Mirota KSM</b></span>
+          <span class="logo-lg"><b>Wasim | Mirota KSM</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -140,6 +140,7 @@
                 <li><a href="<?php echo base_url();?>Datasupplier"><i class="fa fa-circle-o"></i> Data Supplier</a></li>
                 <li><a href="<?php echo base_url(); ?>Datamaklon"><i class="fa fa-circle-o"></i> Data Perusahaan</a></li>
                 <li><a href="<?php echo base_url(); ?>Databahan"><i class="fa fa-circle-o"></i> Data Bahan Baku</a></li>
+                <li><a href="<?php echo base_url(); ?>Uploadstok"><i class="fa fa-circle-o"></i> Upload Stok</a></li>
               </ul>
             </li>
             <?php } ?>
