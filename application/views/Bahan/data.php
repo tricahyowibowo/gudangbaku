@@ -43,6 +43,8 @@
 
             <!-- Tabel -->
               <a href="<?=base_url('bahan/tambahdata')?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah bahan</a>
+              <a href="<?=base_url('bahan/tambahdataexcel')?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Import Excel</a>
+
               <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
@@ -51,8 +53,10 @@
                     <th>Kode Bahan</th>
                     <th>Nama bahan</th>
                     <th>Harga</th>
+                    <th>Update Harga</th>
                     <th>Supplier</th>
                     <th>Edit</th>
+                    <th>Edit Harga</th>
                     <th>Delet</th>
                   </tr>
                   </thead>
@@ -66,8 +70,10 @@
                       <td><?=$dd->kode_bahan?></td>
                       <td><?=$dd->nama_bahan?></td>
                       <td><?=$dd->harga?></td>
+                      <td><?=$dd->tgl_updateharga?></td>
                       <td><?=$dd->nama_supplier?></td>
                       <td><a type="button" class="btn btn-info"  href="<?=base_url('bahan/detail/'.$dd->kode_bahan)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                      <td><a type="button" class="btn btn-info"  href="<?=base_url('bahan/detailharga/'.$dd->kode_bahan)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                       <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('bahan/delete/'.$dd->kode_bahan)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                   </tr>
                 <?php endforeach;?>

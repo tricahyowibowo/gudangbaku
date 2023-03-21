@@ -20,6 +20,14 @@ class Crud_model extends CI_Model
 		return $this->db->insert_batch('tbl_transaksi', $data);
 	}
 
+    public function insert_bahan($data){
+		return $this->db->insert_batch('tbl_bahan', $data);
+	}
+
+    public function insert_batch($data,$table){
+		return $this->db->insert_batch($table, $data);
+	}
+
     function update($where,$data,$table){
 		$this->db->where($where);
 		$this->db->update($table,$data);
