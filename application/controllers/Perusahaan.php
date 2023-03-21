@@ -24,19 +24,19 @@ class Perusahaan extends BaseController
     }
 
     public function index(){
-        redirect('Datamaklon');
+        redirect('Dataperusahaan');
     }
 
-    public function datamaklon(){
-        $this->global['pageTitle'] = 'Data maklon';
+    public function dataperusahaan(){
+        $this->global['pageTitle'] = 'Data perusahaan';
         $data['list_data'] = $this->crud_model->tampil_data('tbl_perusahaan');
-        $this->loadViews("maklon/data", $this->global, $data , NULL);
+        $this->loadViews("perusahaan/data", $this->global, $data , NULL);
     }
 
     public function tambahdata(){
-        $this->global['pageTitle'] = 'Tambah maklon';
+        $this->global['pageTitle'] = 'Tambah perusahaan';
 
-        $this->loadViews("maklon/tambah_maklon", $this->global , NULL);
+        $this->loadViews("perusahaan/tambah_perusahaan", $this->global , NULL);
     }
 
     public function simpan(){
@@ -55,21 +55,21 @@ class Perusahaan extends BaseController
           $this->crud_model->input($data,'tbl_perusahaan');
     
           $this->session->set_flashdata('msg_berhasil','Data Barang Berhasil Ditambahkan');
-          redirect('Datamaklon');
+          redirect('Dataperusahaan');
         }else {
             $this->session->set_flashdata('msg_gagal','Data Gagal Ditambahkan, periksa kembali');
-            redirect(base_url('maklon/tambahdata'));
+            redirect(base_url('perusahaan/tambahdata'));
         }
 	}
 
     public function detail($id_perusahaan){
-        $this->global['pageTitle'] = 'Edit Data maklon';
+        $this->global['pageTitle'] = 'Edit Data perusahaan';
 
         $where = array('id_perusahaan' => $id_perusahaan);
 
         $data['id_perusahaan'] = $this->uri->segment(3);
         $data['list_data'] = $this->crud_model->Getdata($where,'tbl_perusahaan');
-        $this->loadViews("maklon/detail", $this->global, $data , NULL);        
+        $this->loadViews("perusahaan/detail", $this->global, $data , NULL);        
     }
 
     public function update(){
@@ -89,12 +89,12 @@ class Perusahaan extends BaseController
         $this->crud_model->update($where,$data,'tbl_perusahaan');
   
         $this->session->set_flashdata('msg_berhasil','Data Berhasil Diubah');
-        redirect('maklon/detail/' . $id_perusahaan);
+        redirect('perusahaan/detail/' . $id_perusahaan);
     }
 
     public function delete($id_perusahaan){
       $where = array('id_perusahaan' => $id_perusahaan);
       $this->crud_model->delete($where , 'tbl_perusahaan');
-      redirect(base_url('maklon'));
+      redirect(base_url('perusahaan'));
     }
 }
