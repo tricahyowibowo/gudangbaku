@@ -138,7 +138,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php echo base_url();?>Datasupplier"><i class="fa fa-circle-o"></i> Data Supplier</a></li>
-                <li><a href="<?php echo base_url(); ?>Datamaklon"><i class="fa fa-circle-o"></i> Data Perusahaan</a></li>
+                <li><a href="<?php echo base_url(); ?>Dataperusahaan"><i class="fa fa-circle-o"></i> Data Perusahaan</a></li>
                 <li><a href="<?php echo base_url(); ?>Databahan"><i class="fa fa-circle-o"></i> Data Bahan Baku</a></li>
                 <li><a href="<?php echo base_url(); ?>Uploadstok"><i class="fa fa-circle-o"></i> Upload Stok</a></li>
               </ul>

@@ -8,7 +8,7 @@
       <ol class="breadcrumb">
         <li><a href="<?=base_url('dashboard')?>"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Tables</li>
-        <li class="active"><a href="<?=base_url('Datamaklon')?>">Tabel Data Perusahaan</li>
+        <li class="active"><a href="<?=base_url('Dataperusahaan')?>">Tabel Data Perusahaan</li>
       </ol>
     </section>
 
@@ -42,13 +42,14 @@
             <!-- /Pesan -->
 
             <!-- Tabel -->
-              <a href="<?=base_url('maklon/tambahdata')?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah perusahaan</a>
+              <a href="<?=base_url('perusahaan/tambahdata')?>" style="margin-bottom:10px;" type="button" class="btn btn-primary" name="tambah_data"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah perusahaan</a>
               <div class="table-responsive">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>No</th>
                     <th>Nama perusahaan</th>
+                    <th>Kontak perusahaan</th>
                     <th>Alamat perusahaan</th>
                     <th>Edit</th>
                     <th>Delet</th>
@@ -62,9 +63,10 @@
                       foreach($list_data as $dd): ?>
                       <td><?=$no++?></td>
                       <td><?=$dd->nama_perusahaan?></td>
+                      <td><?=$dd->kontak_perusahaan?></td>
                       <td><?=$dd->alamat_perusahaan?></td>
-                      <td><a type="button" class="btn btn-info"  href="<?=base_url('maklon/detail/'.$dd->id_perusahaan)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                      <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('supplier/delete/'.$dd->id_perusahaan)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                      <td><a type="button" class="btn btn-info"  href="<?=base_url('perusahaan/detail/'.$dd->id_perusahaan)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                      <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('perusahaan/delete/'.$dd->id_perusahaan)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                   </tr>
                 <?php endforeach;?>
                 <?php }else { ?>

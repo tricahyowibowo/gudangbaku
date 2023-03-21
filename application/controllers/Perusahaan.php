@@ -45,11 +45,13 @@ class Perusahaan extends BaseController
         if($this->form_validation->run() == TRUE)
         {
           $nama_perusahaan      = $this->input->post('nama_perusahaan',TRUE);
+          $kontak_perusahaan      = $this->input->post('kontak_perusahaan',TRUE);
           $alamat_perusahaan      = $this->input->post('alamat_perusahaan',TRUE);
 
     
           $data = array(
                 'nama_perusahaan'      => $nama_perusahaan,
+                'kontak_perusahaan'      => $kontak_perusahaan,
                 'alamat_perusahaan'      => $alamat_perusahaan,
           );
           $this->crud_model->input($data,'tbl_perusahaan');
@@ -76,11 +78,13 @@ class Perusahaan extends BaseController
 
         $id_perusahaan      = $this->uri->segment(3);
         $nama_perusahaan      = $this->input->post('nama_perusahaan',TRUE);
+        $kontak_perusahaan      = $this->input->post('kontak_perusahaan',TRUE);
         $alamat_perusahaan      = $this->input->post('alamat_perusahaan',TRUE);
 
   
         $data = array(
               'nama_perusahaan'      => $nama_perusahaan,
+              'kontak_perusahaan'      => $kontak_perusahaan,
               'alamat_perusahaan'      => $alamat_perusahaan,
         );
 

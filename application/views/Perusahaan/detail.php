@@ -42,17 +42,24 @@
               <?php } ?>
               <div class="row">
                 <div class="col-md-8">
-                  <form class="form-horizontal" action="<?=base_url('maklon/update/'.$id_perusahaan)?>" role="form" method="post">
+                  <form class="form-horizontal" action="<?=base_url('perusahaan/update/'.$id_perusahaan)?>" role="form" method="post">
                     <div class="box-body">
 
                     <?php foreach($list_data as $l){ ?>
-                      <a href="<?=base_url('maklon')?>" type="button" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
+                      <a href="<?=base_url('perusahaan')?>" type="button" class="btn btn-default"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
 
                       <div class="form-group">
                         <label for="tgl_transaksi" class="col-sm-4 control-label" >Nama Perusahaan :</label>
                         <div class="col-sm-6">
                           <input type="text" name="nama_perusahaan" id="nama_perusahaan" class="form-control" value="<?=$l->nama_perusahaan?>">
                         </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="kontak_perusahaan" class="col-sm-4 control-label" >Kontak perusahaan :</label>
+                            <div class="col-sm-6">
+                            <input type="text" name="kontak_perusahaan" id="kontak_perusahaan" class="form-control"  value="<?=$l->kontak_perusahaan?>">
+                            </div>
                       </div>
 
                       <div class="form-group">

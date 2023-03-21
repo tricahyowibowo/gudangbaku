@@ -90,7 +90,7 @@ $route['Datakategori'] = 'kategori/datakategori';
 $route['Datakaryawan'] = 'karyawan/datakaryawan';
 $route['Datasupplier'] = 'supplier/datasupplier';
 
-$route['Datamaklon'] = 'maklon/datamaklon';
+$route['Dataperusahaan'] = 'perusahaan/dataperusahaan';
 
 $route['Databahan'] = 'bahan/databahan';
 

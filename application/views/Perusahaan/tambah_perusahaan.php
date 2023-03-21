@@ -42,20 +42,27 @@
               <?php } ?>
               <div class="row">
                 <div class="col-md-12">
-                  <form class="form-horizontal" action="<?=base_url('supplier/simpan')?>" role="form" method="post">
+                  <form class="form-horizontal" action="<?=base_url('perusahaan/simpan')?>" role="form" method="post">
                     <div class="box-body">
 
                       <div class="form-group">
-                          <label for="tgl_transaksi" class="col-sm-4 control-label" >Nama supplier :</label>
+                          <label for="nama_perusahaan" class="col-sm-4 control-label" >Nama perusahaan :</label>
                             <div class="col-sm-3">
-                            <input type="text" name="nama_supplier" id="nama_supplier" class="form-control">
+                            <input type="text" name="nama_perusahaan" id="nama_perusahaan" class="form-control">
                             </div>
                       </div>
 
                       <div class="form-group">
-                          <label for="tgl_transaksi" class="col-sm-4 control-label" >Alamat supplier :</label>
+                          <label for="kontak_perusahaan" class="col-sm-4 control-label" >Kontak perusahaan :</label>
                             <div class="col-sm-3">
-                            <textarea type="text" name="alamat_supplier" id="alamat_supplier" class="form-control"></textarea>
+                            <input type="text" name="kontak_perusahaan" id="kontak_perusahaan" class="form-control">
+                            </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="alamat_perusahaan" class="col-sm-4 control-label" >Alamat perusahaan :</label>
+                            <div class="col-sm-3">
+                            <textarea type="text" name="alamat_perusahaan" id="alamat_perusahaan" class="form-control"></textarea>
                             </div>
                       </div>
 
@@ -63,7 +70,7 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <a type="button" class="btn btn-default" onclick="history.back(-1)" name="btn_kembali"><i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali</a>
-                        <input type="submit" value="Simpan" class="btn pull-right btn btn-success"></input>
+                        <input type="submit" value="Simpan" class="btn btn btn-success"></input>
                     </div>
                     <!-- /.box-footer -->
                     <!-- /.box-body -->
