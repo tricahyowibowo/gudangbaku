@@ -50,6 +50,9 @@
                     <th>No</th>
                     <th>Nama supplier</th>
                     <th>Alamat supplier</th>
+                    <th>Kontak supplier</th>
+                    <th>kategori supplier</th>
+                    <th>Nama Produsen</th>
                     <th>Edit</th>
                     <th>Delet</th>
                   </tr>
@@ -63,6 +66,9 @@
                       <td><?=$no++?></td>
                       <td><?=$dd->nama_supplier?></td>
                       <td><?=$dd->alamat_supplier?></td>
+                      <td><?=$dd->no_telp?></td>
+                      <td><?=$dd->kategori?></td>
+                      <td><?=$dd->nama_produsen?></td>
                       <td><a type="button" class="btn btn-info"  href="<?=base_url('supplier/detail/'.$dd->id_supplier)?>" name="btn_update" style="margin:auto;"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
                       <td><a type="button" class="btn btn-danger btn-delete"  href="<?=base_url('supplier/delete/'.$dd->id_supplier)?>" name="btn_delete" style="margin:auto;"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                   </tr>

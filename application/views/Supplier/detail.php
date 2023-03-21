@@ -56,6 +56,27 @@
                       </div>
 
                       <div class="form-group">
+                          <label for="no_telp" class="col-sm-4 control-label" >Kontak supplier :</label>
+                            <div class="col-sm-6">
+                            <input type="text" name="no_telp" id="no_telp" class="form-control" value="<?=$l->no_telp?>">
+                            </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="kategori" class="col-sm-4 control-label" >Kategori supplier :</label>
+                            <div class="col-sm-6">
+                            <input type="text" name="kategori" id="kategori" class="form-control" value="<?=$l->kategori?>">
+                            </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="nama_produsen" class="col-sm-4 control-label" >Nama Produsen :</label>
+                            <div class="col-sm-6">
+                            <input type="text" name="nama_produsen" id="nama_produsen" class="form-control" value="<?=$l->nama_produsen?>">
+                            </div>
+                      </div>
+
+                      <div class="form-group">
                         <label for="tgl_transaksi" class="col-sm-4 control-label" >Alamat supplier :</label>
                         <div class="col-sm-6">
                           <input type="text" name="alamat_supplier" id="alamat_supplier" class="form-control" value="<?=$l->alamat_supplier?>">

@@ -42,18 +42,28 @@ class Supplier extends BaseController
     public function simpan(){
         $this->form_validation->set_rules('nama_supplier','nama supplier','required');
         $this->form_validation->set_rules('alamat_supplier','alamat supplier','required');
+        $this->form_validation->set_rules('no_telp','no_telp','required');
+        $this->form_validation->set_rules('kategori','kategori','required');
+        $this->form_validation->set_rules('nama_produsen','nama produsen','required');
 
     
         if($this->form_validation->run() == TRUE)
         {
-          $nama_supplier      = $this->input->post('nama_supplier',TRUE);
+          $nama_supplier        = $this->input->post('nama_supplier',TRUE);
           $alamat_supplier      = $this->input->post('alamat_supplier',TRUE);
+          $no_telp              = $this->input->post('no_telp',TRUE);
+          $kategori             = $this->input->post('kategori',TRUE);
+          $nama_produsen        = $this->input->post('nama_produsen',TRUE);
 
     
           $data = array(
-                'nama_supplier'      => $nama_supplier,
-                'alamat_supplier'      => $alamat_supplier,
+                'nama_supplier'     => $nama_supplier,
+                'alamat_supplier'   => $alamat_supplier,
+                'no_telp'           => $no_telp,
+                'kategori'          => $kategori,
+                'nama_produsen'     => $nama_produsen,
           );
+
           $this->crud_model->input($data,'tbl_supplier');
     
           $this->session->set_flashdata('msg_berhasil','Data Barang Berhasil Ditambahkan');
@@ -78,13 +88,19 @@ class Supplier extends BaseController
 
     public function update(){
         $id_supplier      = $this->uri->segment(3);
-        $nama_supplier      = $this->input->post('nama_supplier',TRUE);
+        $nama_supplier        = $this->input->post('nama_supplier',TRUE);
         $alamat_supplier      = $this->input->post('alamat_supplier',TRUE);
+        $no_telp              = $this->input->post('kontak',TRUE);
+        $kategori             = $this->input->post('kategori',TRUE);
+        $nama_produsen        = $this->input->post('nama_produsen',TRUE);
 
   
         $data = array(
-              'nama_supplier'      => $nama_supplier,
-              'alamat_supplier'      => $alamat_supplier,
+            'nama_supplier'     => $nama_supplier,
+            'alamat_supplier'   => $alamat_supplier,
+            'no_telp'           => $no_telp,
+            'kategori'          => $kategori,
+            'nama_produsen'     => $nama_produsen,
         );
 
         $where = array('id_supplier' => $id_supplier);
